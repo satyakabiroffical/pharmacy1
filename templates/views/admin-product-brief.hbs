@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<head>
+
+    {{>adminhead}}
+
+
+
+
+    <title>Admin Prouct Brief</title>
+
+</head>
+
+<body>
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin1" data-sidebartype="full"
+        data-sidebar-position="absolute" data-header-position="relative" data-boxed-layout="full">
+        <div class="app-container" data-navbarbg="skin1"></div>
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+        {{>adminheader}}
+        <!-- ============================================================== -->
+        <!-- End Topbar header -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        {{>adminsidebar}}
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="page-breadcrumb">
+                <div class="row">
+                    <div class="col-7 align-self-center">
+                        <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Products  Brief</h4>
+                        <div class="d-flex align-items-center">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb m-0 p-0">
+                                    <li class="breadcrumb-item"><a href="/admin/dashboard" class="text-muted">Home</a>
+                                    </li>
+                                    <li class="breadcrumb-item text-muted active" aria-current="page">Products Brief</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="col-5 align-self-end">
+
+                        <div class="customize-input float-right">
+                            {{!-- <a href="/admin/addproduct" class="btn btn-primary rounded-pill"> <i
+                                    class="mdi mdi-cart-plus" style="font-size:1rem;"></i> Add Images</a> --}}
+
+                            {{!-- <select class="custom-select form-control">
+                                <option selected>June 19</option>
+                                <option value="1">July 19</option>
+                                <option value="2">Aug 19</option>
+                            </select> --}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+    
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <div class="row">
+
+                    <div class="col-12">
+                        <div class="card">
+                            {{!-- <div class="card-body">
+                                <h4 class="card-title">Striped rows</h4>
+                                <h6 class="card-subtitle">Use <code>.table-striped</code> to add zebra-striping to any
+                                    table row within the <code>&lt;tbody&gt;</code>.</h6>
+                            </div> --}}
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+
+                                            <th scope="col">Product Name</th>
+                                            <th scope="col">Product Dsecription</th>
+
+                                            <th scope="col">Product Price</th>
+                                            <th scope="col">Product Quantity</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <script>let count = 1</script>
+
+                                        <tr>
+
+                                            <td class="align-middle">{{currentProduct.productName}}</td>
+                                            <td class="align-middle">{{currentProduct.productDescription}}</td>
+                                            <td class="align-middle">{{currentProduct.productPrice}}</td>
+                                            <td class="align-middle">{{currentProduct.productQuantity}}</td>
+
+                                            <td class="align-middle">
+                                                <div class="dropdown dropdown-action">
+                                                    <a href="#" class="action-icon dropdown-toggle"
+                                                        data-toggle="dropdown" aria-expanded="false"><i
+                                                            class="fa fa-ellipsis-v"></i></a>
+                                                    <div class="dropdown-menu dropdown-menu-right">
+                                                        <a class="dropdown-item"
+                                                            href="/admin/updateproduct/{{currentProduct._id}}">
+                                                            <i class="mdi mdi-grease-pencil m-r-5 pe-3"></i> Edit</a>
+                                                        <a class="dropdown-item"
+                                                            href="/admin-delete-product/{{currentProduct._id}}">
+                                                            <i class="mdi mdi-delete-forever m-r-5 pe-3"></i> Delete</a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="table-responsive">
+                                <span  class="pb-4 mb-4">image height and width should be 300px x 300px</span>
+                                <table class="table table-striped">
+                                    <tr>
+                                        <td class="align-middle">
+                                            <img src="../products/{{currentProduct.productImage1}}"
+                                                alt="image {{currentProduct.productImage1}}" height="150px">
+                                        </td>
+                                        <form action="/admin-product-image-update" method="POST" enctype="multipart/form-data">
+                                        <td class="align-middle">
+                                            
+                                            <input type="hidden" name="productID" value="{{currentProduct._id}}">
+                                            <input type="hidden" name="num" value="1">
+                                            <input type="hidden" name="productName" value="{{currentProduct.productName}}">
+                                            <input type="file" name="productImage1" required>
+                                        </td>
+                                        
+                                        <td class="align-middle">
+                                            <input type="submit" value="Update this image">
+                                        </td>
+                                        </form>
+                                    </tr>
+                                    <tr>
+                                        <td class="align-middle">
+                                            <img src="../products/{{currentProduct.productImage2}}"
+                                                alt="image {{currentProduct.productImage2}}" height="150px">
+                                        </td>
+                                        <form action="/admin-product-image-update" method="POST" enctype="multipart/form-data">
+                                        <td class="align-middle">
+                                            <input type="hidden" name="productID" value="{{currentProduct._id}}">
+                                            <input type="hidden" name="num" value="2">
+                                            <input type="hidden" name="productName" value="{{currentProduct.productName}}">
+                                            <input type="file" name="productImage2" required>
+                                        </td>
+                                        <td class="align-middle">
+                                            <input type="submit" value="Update this image">
+                                        </td>
+                                        </form>
+                                    </tr>
+                                    <tr>
+                                        <td class="align-middle">
+                                            <img src="../products/{{currentProduct.productImage3}}"
+                                                alt="image {{currentProduct.productImage3}}" height="150px">
+                                        </td>
+                                        <form action="/admin-product-image-update" method="POST" enctype="multipart/form-data">
+                                        <td class="align-middle">
+                                            <input type="hidden" name="productID" value="{{currentProduct._id}}">
+                                            <input type="hidden" name="num" value="3">
+                                            <input type="hidden" name="productName" value="{{currentProduct.productName}}">
+                                            <input type="file" name="productImage3" required>
+                                        </td>
+                                        <td class="align-middle">
+                                            <input type="submit" value="Update this image">
+                                        </td>
+                                        </form>
+                                    </tr>
+                                    <tr>
+                                        <td class="align-middle">
+                                            <img src="../products/{{currentProduct.productImage4}}"
+                                                alt="image {{currentProduct.productImage4}}" height="150px">
+                                        </td>
+                                        <form action="/admin-product-image-update" method="POST" enctype="multipart/form-data">
+                                        <td class="align-middle">
+                                            <input type="hidden" name="productID" value="{{currentProduct._id}}">
+                                            <input type="hidden" name="num" value="4">
+                                            <input type="hidden" name="productName" value="{{currentProduct.productName}}">
+                                            <input type="file" name="productImage4" required>
+                                        </td>
+                                        <td class="align-middle">
+                                            <input type="submit" value="Update this image">
+                                        </td>
+                                        </form>
+                                    </tr>
+
+                                </table>
+                            </div>
+
+                            <div>
+
+                                <div class="images"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- ============================================================== -->
+                <!-- End PAge Content -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- Right sidebar -->
+                <!-- ============================================================== -->
+                <!-- .right-sidebar -->
+                <!-- ============================================================== -->
+                <!-- End Right sidebar -->
+                <!-- ============================================================== -->
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- footer -->
+            <!-- ============================================================== -->
+            {{>footer}}
+            <!-- ============================================================== -->
+            <!-- End footer -->
+            <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page wrapper  -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+
+    {{>adminallqueries}}
+
+    <script>
+
+        $(document).ready(function () {
+            let msg = "{{message}}"
+            if (msg){
+                
+                swal("Congratulations", msg , "success");
+
+                setTimeout(() => {
+                console.log(msg)
+                
+                    window.location.assign("{{add}}")
+
+
+            }, 2000)
+            }
+            
+        });
+    </script>
+
+
+</body>
+
+</html>

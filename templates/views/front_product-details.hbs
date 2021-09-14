@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  {{>front_head}}
+
+  <title>Human-Life-Biotech product-details</title>
+
+ 
+</head>
+<body>
+
+  <!-- Back to top button -->
+  <div class="back-to-top"></div>
+
+  {{>front_header}}
+
+
+
+  <div class="page-section pt-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8">
+          <nav aria-label="Breadcrumb">
+            <ol class="breadcrumb bg-transparent py-0 mb-5">
+              <li class="breadcrumb-item"><a href="/">Home</a></li>
+              <li class="breadcrumb-item"><a href="/products">Products</a></li>
+              <li class="breadcrumb-item active" aria-current="page">{{product.productName}}</li>
+            </ol>
+          </nav>
+        </div>
+      </div> <!-- .row -->
+
+      <div class="row">
+        <div class="col">
+          <article class=" row blog-details d-flex">
+            <div class="col-12 col-lg-4 ">
+            <div class="post-thumb p-4 text-center">
+              <img src="../products/{{product.productImage1}}" class="img-fluid" style="width: 300px; height:300px"  alt="" id="mainDisplay">
+              
+            </div>
+            <div class="  d-flex justify-content-around">
+                  <div class="p-1 bg-grey "><img class="change" src="../products/{{product.productImage1}}" class="img-fluid" style="width:5rem; height:5rem"  alt="" ></div>
+                  <div class="p-1 bg-grey "><img class="change" src="../products/{{product.productImage2}}" class="img-fluid" style="width:5rem; height:5rem"  alt="" ></div>
+                  <div class="p-1 bg-grey "><img class="change" src="../products/{{product.productImage3}}" class="img-fluid" style="width:5rem; height:5rem"  alt="" ></div>
+                  <div class="p-1 bg-grey "><img class="change" src="../products/{{product.productImage4}}" class="img-fluid" style="width:5rem; height:5rem"  alt="" ></div>
+              </div>
+            </div>
+            
+           <div class="col-12 col-lg-8   p-4">
+             <div class="table-responsive">
+               <table class="table">
+                   <tr >
+                     <th class="align-middle" scope="col-1">Product Name</th>
+                     <td class="align-middle"><h2>{{product.productName}}</h2></td>
+                   </tr>
+                   <tr>
+                     <th class="align-middle" scope="col-1">Product Price</th>
+                     <td class="align-middle">{{product.productPrice}}</td>
+                   </tr>
+                   <tr>
+                     <th class="align-middle" scope="col-1">Product Quantity</th>
+                     <td class="align-middle">
+                       <button class=" btn-dark rounded-circle decrement"  style="margin:0px; padding:0px; line-height:1.5rem; width:1.6rem; height:1.6rem " id="decrement">-</button>
+                       <span class="px-4" id="selectedQuantity">1</span>
+                       <button class=" btn-dark rounded-circle increment"  style="margin:0px; padding:0px; line-height:1.5rem; width:1.6rem; height:1.6rem " id="increment">+</button>
+                       <span class="mx-lg-4" id="availability"> Available quantity : {{product.productQuantity}}</span>
+                       
+                     </td>
+                     
+                   </tr>
+                    <tr>
+                      <th class="align-middle" scope="col-1">Total Price</th>
+                      <td class="align-middle">₹<span id="selectedPrice">{{product.productPrice}}</span>/- only</td>
+                    </tr>
+                   
+                    <tr>
+                     <th class="align-middle" scope="col-1">Product Description</th>
+                     <td class="align-middle">{{product.productDescription}}</td>
+                   </tr>
+
+                    <tr>
+                     <th class="align-middle" scope="col-1"></th>
+                     <td class="align-middle"><a href="/buy-now"><button class="btn btn-primary">Buy now</button></a></td>
+                   </tr>
+                  
+               </table>
+             </div>
+            
+      
+           
+            </div>
+          </article> <!-- .blog-details -->
+
+       
+      </div> <!-- .row -->
+    </div> <!-- .container -->
+  </div> <!-- .page-section -->
+
+</div>
+
+ 
+  {{>front_footer}}
+
+ 
+{{>front_script}}
+{{!-- counter script start --}}
+<script>
+  let selectedQuantity = document.getElementById("selectedQuantity");
+  let selectedPrice = document.getElementById("selectedPrice");
+  let increment = document.getElementById("increment");
+  let decrement = document.getElementById("decrement");
+  let count = 1
+  let availability = "{{product.productQuantity}}"
+  let prodcutPrice = "{{product.productPrice}}"
+
+  increment.addEventListener('click', ()=>{
+      if(count < availability){
+      count++;
+      selectedQuantity.innerHTML = count;
+      selectedPrice.innerHTML = count * prodcutPrice
+
+      }
+  });
+
+  decrement.addEventListener('click', ()=>{
+      if(count > 1){
+      count--;
+      selectedQuantity.innerHTML = count;
+      selectedPrice.innerHTML = count * prodcutPrice
+
+      }
+  });
+</script>
+{{!-- couter script ends --}}
+
+{{!-- images change script start --}}
+ <script>
+   let mainDisplay = document.getElementById("mainDisplay");
+   $('.change').on('mouseover', function() {
+
+       mainDisplay.src = this.src
+}) 
+ </script> 
+{{!-- images change script ends --}}
+  
+</body>
+</html>

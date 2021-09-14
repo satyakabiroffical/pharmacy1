@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<head>
+
+	{{>adminhead}}
+
+
+	<title>Admin User Messages</title>
+
+</head>
+
+<body>
+	<!-- ============================================================== -->
+	<!-- Preloader - style you can find in spinners.css -->
+	<!-- ============================================================== -->
+	<div class="preloader">
+		<div class="lds-ripple">
+			<div class="lds-pos"></div>
+			<div class="lds-pos"></div>
+		</div>
+	</div>
+	<!-- ============================================================== -->
+	<!-- Main wrapper - style you can find in pages.scss -->
+	<!-- ============================================================== -->
+	<div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin1" data-sidebartype="full"
+		data-sidebar-position="absolute" data-header-position="relative" data-boxed-layout="full">
+		<div class="app-container" data-navbarbg="skin1"></div>
+		<!-- ============================================================== -->
+		<!-- Topbar header - style you can find in pages.scss -->
+		<!-- ============================================================== -->
+		{{>adminheader}}
+		<!-- ============================================================== -->
+		<!-- End Topbar header -->
+		<!-- ============================================================== -->
+		<!-- ============================================================== -->
+		<!-- Left Sidebar - style you can find in sidebar.scss  -->
+		<!-- ============================================================== -->
+		{{>adminsidebar}}
+		<!-- ============================================================== -->
+		<!-- End Left Sidebar - style you can find in sidebar.scss  -->
+		<!-- ============================================================== -->
+		<!-- ============================================================== -->
+		<!-- Page wrapper  -->
+		<!-- ============================================================== -->
+		<div class="page-wrapper">
+			<!-- ============================================================== -->
+			<!-- Bread crumb and right sidebar toggle -->
+			<!-- ============================================================== -->
+			<div class="page-breadcrumb">
+				<div class="row">
+					<div class="col-7 align-self-center">
+						<h4 class="page-title text-truncate text-dark font-weight-medium mb-1">User Messages</h4>
+						<div class="d-flex align-items-center">
+							<nav aria-label="breadcrumb">
+								<ol class="breadcrumb m-0 p-0">
+									<li class="breadcrumb-item"><a href="/admin/dashboard" class="text-muted">Home</a>
+									</li>
+									<li class="breadcrumb-item text-muted active" aria-current="page">User Messages</li>
+								</ol>
+							</nav>
+						</div>
+					</div>
+					<div class="col-5 align-self-center">
+						<div class="customize-input float-right">
+							{{!-- <select class="custom-select form-control">
+								<option selected>June 19</option>
+								<option value="1">July 19</option>
+								<option value="2">Aug 19</option>
+							</select> --}}
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- ============================================================== -->
+			<!-- End Bread crumb and right sidebar toggle -->
+			<!-- ============================================================== -->
+			<!-- ============================================================== -->
+			<!-- Container fluid  -->
+			<!-- ============================================================== -->
+			<div class="container-fluid">
+
+
+				<!-- ============================================================== -->
+				<!-- Start Page Content -->
+				<!-- ============================================================== -->
+				<div class="row">
+					<div class="col-12">
+						<div class="card">
+							<div class="card-body">
+								{{!-- <h4 class="card-title">User Messages</h4> --}}
+								{{!-- <h6 class="card-subtitle">you can use any icon with
+									class of <code class="mr-2">mid mid-</code>name
+									of icon</h6> --}}
+								<div class="table-responsive">
+									<table class="table table-striped">
+										<thead class="bg-dark text-light">
+											<tr>
+												<th scope="col-1">S.No.</th>
+												<th scope="col-2">User Name</th>
+												<th scope="col-2">User Email </th>
+												<th scope="col-2">User Subject</th>
+												<th scope="col-4">User Message</th>
+												<th scope="col-1"></th>
+											</tr>
+										</thead>
+
+										<tbody>
+											{{#each usermessages}}
+											<tr>
+												<td id="id{{@index}}" class="align-middle">{{@index}}</td>
+												<td class="align-middle">{{this.userName}}</td>
+												<td class="align-middle">{{this.userEmail}}</td>
+												<td class="align-middle">{{this.userSubject}}</td>
+												<td class="align-middle">{{this.userMessage}}</td>
+												<td class="align-middle">
+													<form action="/usermessagedelete" method="POST">
+														<input type="hidden" name="id" value="{{this._id}}">
+														<input type="submit" class="btn btn-danger" value="delete">
+													</form>
+												</td>
+											</tr>
+											<script>document.getElementById("id{{@index}}").innerHTML = {{ @index }}+1</script>
+											{{/each}}
+										</tbody>
+									</table>
+								</div>
+
+							</div>
+						</div>
+					</div>
+
+				</div>
+				<!-- ============================================================== -->
+				<!-- End PAge Content -->
+				<!-- ============================================================== -->
+			</div>
+			<!-- ============================================================== -->
+			<!-- End Container fluid  -->
+			<!-- ============================================================== -->
+			<!-- ============================================================== -->
+			<!-- footer -->
+			<!-- ============================================================== -->
+			{{>footer}}
+			<!-- ============================================================== -->
+			<!-- End footer -->
+			<!-- ============================================================== -->
+		</div>
+		<!-- ============================================================== -->
+		<!-- End Page wrapper  -->
+		<!-- ============================================================== -->
+	</div>
+	<!-- ============================================================== -->
+	<!-- End Wrapper -->
+	<!-- ============================================================== -->
+	<!-- ============================================================== -->
+
+	{{>adminallqueries}}
+
+   <script>
+        $(document).ready(function () {
+            let msg = "{{message}}"
+            if (msg){
+                swal("Congratulations", msg , "success");
+                setTimeout(() => {
+                    window.location.assign("/admin/usermessages")
+            }, 2000)
+            }
+        });
+    </script>
+
+
+
+</body>
+
+</html>

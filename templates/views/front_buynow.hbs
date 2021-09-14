@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+
+    {{>front_head}}
+
+  <title>Human-Life-Biotech Home</title>
+
+ 
+</head>
+<body >
+
+  {{>front_header}}
+
+
+
+
+
+  <div class="page-section">
+    <div class="container bg-danger text-light p-4 rounded">
+      <h1 class="text-center text-dark wow fadeInUp bg-light">Make a Purchase</h1>
+
+      <form class="main-form" action="/order" method="POST">
+        <div class="row mt-5 ">
+          <div class="col-12 col-sm-6 py-2 wow fadeInLeft">
+            <input type="text" name="customerName" class="form-control" placeholder="Full name" required>
+          </div>
+          <div class="col-12 col-sm-6 py-2 wow fadeInRight">
+            <input type="email" name="customerEmail" class="form-control" placeholder="Email address.." required>
+          </div>
+         <div class="col-12 col-sm-6 py-2 wow fadeInLeft">
+            <input type="text" name="customerMobile" class="form-control" placeholder="Mobile Number" required>
+          </div>
+          <div class="col-12 col-sm-6 py-2 wow fadeInRight">
+            <input type="text" name="customerPincode" class="form-control" placeholder="Pin Code" required>
+          </div>
+          <div class="col-12 py-2 wow fadeInUp" data-wow-delay="300ms">
+            <textarea  name="customerAddress" id="address" class="form-control" rows="6" placeholder="Enter Address" required></textarea>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3 wow zoomIn">Submit for get <b class="text-dark"> Best Price </b></button>
+      </form>
+    </div>
+  </div> <!-- .page-section -->
+
+
+
+
+  {{>front_footer}}
+
+{{>front_script}}
+
+<script>
+  $(document).ready(function () {
+   
+    setTimeout(()=>{
+   
+      $('#myModal').modal('show');
+    }, 2000)
+  });
+</script>
+
+</body>
+</html>

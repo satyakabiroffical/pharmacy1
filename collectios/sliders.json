@@ -1,0 +1,19 @@
+[{
+  "_id": {
+    "$oid": "612e214f880609594f1ab919"
+  },
+  "image": "142098935a65a73a51564b302b6ba07ec2ca2.jpg",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "612e2166880609594f1ab91b"
+  },
+  "image": "15014healthcare-medical-bottles-set-medicine-260nw-1212203548.webp",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "612e217c880609594f1ab91d"
+  },
+  "image": "11601medicine-and-healthcare-web-banner-vector.webp",
+  "__v": 0
+}]

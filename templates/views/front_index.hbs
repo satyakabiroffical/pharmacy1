@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+
+  {{>front_head}}
+
+  <title>Human-Life-Biotech Home</title>
+
+
+</head>
+
+<body>
+
+
+
+  <!-- Modal -->
+  <div class="modal fade " id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header   d-flex justify-content-evenly" style="background-color:lightslategray; color:white ">
+          <h4 class="modal-title">Contact Us</h4>
+          <button type="button" class="close text-light" data-dismiss="modal">&times;</button>
+
+        </div>
+        <div class="modal-body " style="">
+          <form class="contact-form p-4 " action="/usermessage" method="POST">
+            <div class="row mb-3">
+              <div class="col-sm-6 py-2 wow fadeInLeft " style="background-color:lightslategray ;color:white ">
+                <label for="fullName">Name</label>
+                <input type="text" id="fullName" name="userName" class="form-control" placeholder="Full name.."
+                  required>
+              </div>
+              <div class="col-sm-6 py-2 wow fadeInRight" style="background-color:lightslategray; color:white ">
+                <label for="emailAddress">Email</label>
+                <input type="email" id="emailAddress" name="userEmail" class="form-control"
+                  placeholder="Email address.." required>
+              </div>
+              <div class="col-12 py-2 wow fadeInUp" style="background-color:lightslategray; color:white ">
+                <label for="subject">Subject</label>
+                <input type="text" id="subject" name="userSubject" class="form-control" placeholder="Enter subject.."
+                  required>
+              </div>
+              <div class="col-12 py-2 wow fadeInUp" style="background-color:lightslategray ; color:white">
+                <label for="message">Message</label>
+                <textarea id="message" name="userMessage" class="form-control" rows="3" placeholder="Enter Message.."
+                  required></textarea>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary wow zoomIn">Send Message</button>
+          </form>
+        </div>
+        {{!-- <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div> --}}
+      </div>
+
+    </div>
+  </div>
+
+
+
+  <!-- Back to top button -->
+  <div class="back-to-top"></div>
+
+
+
+  {{>front_header}}
+
+
+
+  {{!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX --}}
+  {{!-- slider starts --}}
+  <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+
+      <div class="carousel-item active">
+        <img class="d-block w-100" style="height:70vh" src="../slider/{{slide1}}" alt=" slide">
+      </div>
+      <div class="carousel-item">
+        <img class="d-block w-100" style="height:70vh" src="../slider/{{slide2}}" alt=" slide">
+      </div>
+      <div class="carousel-item">
+        <img class="d-block w-100" style="height:70vh" src="../slider/{{slide3}}" alt=" slide">
+      </div>
+
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+  {{!-- slider ends --}}
+  {{!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX --}}
+
+
+  <div class="page-section">
+    <div class="container">
+      <h1 class="text-center mb-5 wow fadeInUp">Our Products</h1>
+
+      <div class="owl-carousel wow fadeInUp" id="doctorSlideshow">
+        {{#each products}}
+        <div class="item" title="{{this.productName}}">
+          <a class="card-link" href="/product-details/{{this.id}}">
+            <div class="card-doctor">
+              <div class="header">
+                <img src="../products/{{this.productImage1}}" style="max-width: 15rem; max-height:15rem" alt="">
+                {{!-- <div class="meta">
+                  <a href="#"><span class="mai-call"></span></a>
+                  <a href="#"><span class="mai-logo-whatsapp"></span></a>
+                </div> --}}
+              </div>
+              <div class="body">
+                <p class="text-xl mb-0 text-truncate">{{this.productName}}</p>
+                {{!-- <span class="text-sm text-grey">Cardiology</span> --}}
+              </div>
+            </div>
+          </a>
+        </div>
+        {{/each}}
+
+      </div>
+    </div>
+
+      <div class="page-section">
+    <div class="container">
+      <h1 class="text-center mb-5 wow fadeInUp">Testimonials</h1>
+              <div class="container d-flex justify-content-center align-items-center">
+            <img class="test-arrow" src="../front/assets/img/testimonial/caret-left.svg">
+            <div class="card d-flex justify-content-center align-items-center" style="width: 50rem;">
+                <img src="" class="card-img-top" style="width:80px;; height:80px;" alt="...">
+                <div class="card-body text-center">
+                    <h3 class="card-heading">Heading</h3>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+              </div>
+            <img class="test-arrow" src="../front/assets/img/testimonial/caret-right.svg">
+        </div>
+    </div>
+  </div>
+
+
+  </div>
+
+
+
+
+
+  {{>front_footer}}
+
+  {{>front_script}}
+  {{!-- ================================================================================== --}}
+     <script>
+        $(document).ready(function () {
+            let msg = "{{message}}"
+            if (msg){
+                swal("Congratulations", msg , "success");
+                setTimeout(() => {
+                console.log(msg)
+                    window.location.assign("/")
+            }, 2000)
+            }  
+        });
+    </script>
+    {{!-- ======================================================================================= --}}
+{{!-- contact us modal --}}
+  <script>
+    $(document).ready(function () {
+
+      setTimeout(() => {
+
+        $('#myModal').modal('show');
+      }, 2000)
+    });
+  </script>
+{{!-- ======================================================================================= --}}
+{{!-- testimonial script starts --}}
+  <script>
+    // -----testimonial starts here----------------
+const testimonial = [
+    {
+        src:"../front/assets/img/testimonial/test 1.png",
+        name:"Hiroshi Kuniyoshi ‘et al’ (2004)",
+        review:"The Role of Industrial Development in the achievement of the Millenium Development Goals‟Compedium Edition of United Nations Industrial Development Organisation (UNIDO)",
+    },
+    {
+        src:"../front/assets/img/testimonial/test 2.png",
+        name:"Ahmed, A. ‘et al’ (2005)",
+        review:"Entrepreneurship, management, and sustainable development, World Review of Entrepreneurship, Management and Sust. Development, Vol. 1, No. 1,pp.6–30",
+    },
+    {
+        src:"../front/assets/img/testimonial/test 3.png",
+        name:"Marc J. Dollinger",
+        review:"„Entrepreneurship Strategies and Resources‟, Marsh Publications, Lombard, Illinois U.S.A",
+    },
+    {
+        src:"../front/assets/img/testimonial/test 4.png",
+        name:"James Austin ‘et al’ (2006)",
+        review:"Effective Management of Social Enterprises‟ by Harvard University Press, Cambridge, Massachusetts, London, England",
+    },
+    {
+        src:"../front/assets/img/testimonial/test 5.png",
+        name:"WimNaude (2013)",
+        review:"„Entrepreneurship and Economic Development: Theory, Evidence and Policy‟ IZA Discussion Paper No. 7507, P.O. Box 7240, 53072 Bonn, Germany.",
+    },
+]
+
+let cardImg = document.querySelector('.card-img-top');
+let cardHead = document.querySelector('.card-heading');
+let cardText = document.querySelector('.card-text');
+let testArrow = document.querySelectorAll('.test-arrow');
+
+let testCount = 0;
+
+const checktestCount = () =>{
+    if(testCount > testimonial.length -1){
+        testCount = 0;
+    }
+    else if(testCount < 0){
+        testCount = testimonial.length -1;
+    }
+}
+
+const setTestimonial = () =>{
+    let item = testimonial[testCount];
+    cardImg.src = item.src;
+    cardHead.innerHTML = item.name;
+    cardText.innerHTML = item.review;
+}
+
+const  autosetTestimonial = () => {
+    setInterval(()=>{
+        testCount++;
+        checktestCount();
+        setTestimonial();
+    }, 3000)
+};
+
+autosetTestimonial();
+
+testArrow[0].addEventListener('click', ()=>{
+    testCount--;
+    checktestCount();
+    setTestimonial();
+})
+
+
+testArrow[1].addEventListener('click', ()=>{
+    testCount++;
+    checktestCount();
+    setTestimonial();
+})
+setTestimonial();
+  </script>
+  {{!-- testimonial script ends --}}
+
+</body>
+
+</html>

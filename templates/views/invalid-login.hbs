@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {{>adminhead}}
+    <title>Admin Login</title>
+</head>
+<body>
+    <section class="h-100 gradient-form" style="background-color: #eee;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-xl-10">
+        <div class="row justify-content-center rounded-3 text-black">
+         
+            <div class="col-lg-4  bg-light">
+              {{!-- <div class="card-body bg-light p-md-5 "> --}}
+
+                <div class="text-center mb-2">
+                  {{!-- <img src="https://mdbootstrap.com/img/Photos/new-templates/bootstrap-login-form/lotus.png" style="width: 185px;" alt="logo"> --}}
+                  <h4 class="mt-1 mb-3 pb-1 p-3 text-success ">We are The Human-Life-Biotech Team</h4>
+                  <h1 class="text-light rounded-circle bg-success py-4" style="font-size: 2rem; margin-bottom:0px;">Human life <br>Biotech</h1>
+                </div>
+                 <div class="text-danger text-center">
+                    Invalid User Credentials
+                     <br>
+                    Username or Password is incorrect
+                </div>
+                <form action="/login" method="POST" >
+                  <p class=" p-2 text-secondary">Please login to your account</p>
+
+                  <div class="form-outline p-1 mb-4 ">
+                    <input type="email" id="form2Example11" class="form-control " name="username" placeholder="email address" required/>
+                    <label class="form-label p-1" for="form2Example11">Username</label>
+                  </div>
+
+                  <div class="form-outline p-1 mb-4 " >
+                    <input type="password" id="form2Example22" class="form-control " name="password" placeholder="password"required/>
+                    <label class="form-label p-1" for="form2Example22">Password</label>
+                  </div>
+
+                  <div class="text-center p-1 pt-1 mb-5 pb-1 text-light ">
+                    <button class="btn btn-success btn-block fa-lg gradient-custom-2 mb-3" type="submit">Log in</button>
+                    {{!-- <a class="text-muted" href="#!">Forgot password?</a> --}}
+                  </div>
+
+            
+                </form>
+
+              {{!-- </div> --}}
+            </div>
+            
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</body>
+</html>

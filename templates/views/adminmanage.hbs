@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<head>
+
+    {{>admin_id_head}}
+
+    <title>Admin Manage Password</title>
+
+</head>
+
+<body>
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin1" data-sidebartype="full"
+        data-sidebar-position="absolute" data-header-position="relative" data-boxed-layout="full">
+        <div class="app-container" data-navbarbg="skin1"></div>
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+        {{>adminheader}}
+        <!-- ============================================================== -->
+        <!-- End Topbar header -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        {{>adminsidebar}}
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper p-4">
+
+            <div class="page-breadcrumb">
+                <div class="row">
+                    <div class="col-7 align-self-center">
+                        <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Admin Manage</h4>
+                        <div class="d-flex align-items-center">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb m-0 p-0">
+                                    <li class="breadcrumb-item"><a href="/admin/dashboard" class="text-muted">Home</a></li>
+                                    <li class="breadcrumb-item text-muted active" aria-current="page">Admin Manage</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="col-5 align-self-end">
+
+                        <div class="customize-input float-right">
+                            {{!-- <a href="/admin/addproduct" class="btn btn-primary rounded-pill"> <i
+                                    class="mdi mdi-cart-plus" style="font-size:1rem;"></i> Add Product</a> --}}
+                            {{!-- <select class="custom-select form-control">
+                                <option selected>June 19</option>
+                                <option value="1">July 19</option>
+                                <option value="2">Aug 19</option>
+                            </select> --}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">New Password</th>
+                                            <th scope="col">Confirm Password</th>
+                                            <th scope="col"></th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+
+                                            <form action="/admin/adminmanage" method="POST">
+                                                <td class="align-middle">
+                                                    <input type="hidden" name="adminid" value="{{currentAdmin}}">
+                                                  
+                                                    <input type="password" name="adminpassword" required>
+                                                </td>
+                                                <td class="align-middle">
+                                                    <input type="text" name="admincnfpassword" required>
+                                                </td>
+                                                <td class="align-middle">
+                                                    <input type="submit">
+                                                </td>
+                                            </form>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            {{>footer}}
+            <!-- ============================================================== -->
+            <!-- End footer -->
+            <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page wrapper  -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+
+
+    {{>admin_id_allqueries}}
+
+        <script>
+
+        $(document).ready(function () {
+            let msg = "{{msg}}"
+            console.log("{{msg}}")
+            if (msg){
+                swal("Congratulations", msg , "success");
+                setTimeout(() => {
+                console.log(msg)
+                    window.location.assign("/admin/adminmanage")
+            }, 2000)
+            }
+        });
+    </script>
+
+ 
+</body>
+
+</html>

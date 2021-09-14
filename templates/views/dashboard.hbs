@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<head>
+  
+    {{>adminhead}}
+
+    <title>Admin Dashboard</title>
+  
+</head>
+
+<body>
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin1" data-sidebartype="full"
+        data-sidebar-position="absolute" data-header-position="relative" data-boxed-layout="full">
+        <div class="app-container" data-navbarbg="skin1"></div>
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+          {{>adminheader}}
+        <!-- ============================================================== -->
+        <!-- End Topbar header -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+          {{>adminsidebar}}
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="page-breadcrumb">
+                <div class="row">
+                    <div class="col-7 align-self-center">
+                        <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">Good Morning </h3>
+                        <div class="d-flex align-items-center">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb m-0 p-0">
+                                    <li class="breadcrumb-item"><a href="/admin/dashboard" class="text-muted">Dashboard</a>
+                                    </li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="col-5 align-self-center">
+                        <div class="customize-input float-right">
+                            {{!-- <select class="custom-select form-control">
+                                <option selected>Aug 19</option>
+                                <option value="1">July 19</option>
+                                <option value="2">Jun 19</option>
+                            </select> --}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- *************************************************************** -->
+                <!-- Start Earnings & Carousel Widget -->
+                <!-- *************************************************************** -->
+                <div class="row align-items-stretch">
+                    <div class="col-xl-9 col-lg-8 col-md-12 d-flex align-items-stretch justify-content-strech">
+                        <div class="card w-100">
+                            <div class="card-body">
+                                <h4 class="card-title">Earning Statastics</h4>
+                                <div class="pt-5" style="height: 290px;">
+                                    <canvas id="bar-chart" width="400"></canvas>
+                                </div>
+                                <ul class="list-inline text-center mt-4 mb-0">
+                                    <li class="list-inline-item text-muted"><i
+                                            class="font-10 fas fa-circle mr-2 text-info"></i>Sales
+                                    </li>
+                                    <li class="list-inline-item text-muted"><i
+                                            class="font-10 fas fa-circle mr-2 text-light"></i>Earnings
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-4 col-md-12 d-flex align-items-stretch justify-content-strech">
+                        <div class="card w-100">
+                            <div class="card-body position-relative">
+                                <h4 class="card-title mb-4">Total Products: {{products.length}}</h4>
+                                <div id="carouselExampleFade" class="carousel slide status-carousel"
+                                    data-ride="carousel">
+                                    <div class="carousel-inner">
+                                         <script>let count = 1;</script>
+                                        {{#each products}}
+                                    {{#if @index}}
+                                  
+                                        <div class="carousel-item " title="{{this.productName}}">
+                                            <a href="/admin-product-brief/{{this.id}}" style="cursor: pointer;">
+                                            <img src="../products/{{this.productImage1}}"
+                                                class="status-img mx-auto  img-fluid mb-1 rounded d-block " style="width:200px;height:200px" alt="img-1" />
+                                            <h5 class="card-title mt-4 text-truncate">{{this.productName}}</h5>
+                                            
+                                            <p class="text-muted">Product No.:  <span id="id{{@index}}"><script>document.getElementById("id{{@index}}").innerHTML = (count + {{ @index }})</script></span></p>
+                                                
+                                            <div class="d-flex align-items-center">
+                                                <h6 class="font-weight-normal">Price: {{this.productPrice}}</h6>
+                                                <div class="ml-auto">
+                                                    <h6 class="font-weight-normal">Quantity: {{this.productQuantity}}</h6>
+                                                </div>
+                                            </div>
+                                            <div class="progress" style="height: 5px;">
+                                                <div class="progress-bar bg-info" role="progressbar" style="width: 82%;"
+                                                    aria-valuenow="82" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                            </a>
+                                        </div>
+                                       
+                                    {{else}}
+                                   
+                                    <div class="carousel-item active" title="{{this.productName}}">
+                                        <a href="/admin-product-brief/{{this.id}}" style="cursor: pointer;">
+                                            <img src="../products/{{this.productImage1}}"
+                                                class="status-img mx-auto img-fluid mb-1 rounded d-block "style="width:200px;height:200px" alt="img-1" />
+                                            <h4 class="card-title mt-4 text-truncate">{{this.productName}}</h4>
+                                           <p class="text-muted">Product No.:  <span id="id{{@index}}"><script>document.getElementById("id{{@index}}").innerHTML = (count + {{ @index }})</script></span></p>
+                                            <div class="d-flex align-items-center">
+                                                <h6 class="font-weight-normal">Price: {{this.productPrice}}</h6>
+                                                <div class="ml-auto">
+                                                    <h6 class="font-weight-normal">Quantity: {{this.productQuantity}}</h6>
+                                                </div>
+                                            </div>
+                                            <div class="progress" style="height: 5px;">
+                                                <div class="progress-bar bg-info" role="progressbar" style="width: 82%;"
+                                                    aria-valuenow="82" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                            </a>
+                                        </div>
+                                        
+                                    {{/if}}
+                                    {{/each}}
+                                    </div>
+                                    <a class="carousel-control-prev" href="#carouselExampleFade" role="button"
+                                        data-slide="prev">
+                                        <span aria-hidden="true"><i
+                                                class="fas fa-chevron-left text-dark font-12"></i></span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                    <a class="carousel-control-next" href="#carouselExampleFade" role="button"
+                                        data-slide="next">
+                                        <span aria-hidden="true"><i
+                                                class="fas fa-chevron-right text-dark font-12"></i></span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- *************************************************************** -->
+                <!-- End Earnings & Carousel Widget -->
+                <!-- *************************************************************** -->
+                <!-- *************************************************************** -->
+                <!-- Start Total Sales & Earnings Chart -->
+                <!-- *************************************************************** -->
+                <div class="row align-items-stretch">
+                    <div class="col-lg-4 d-flex align-items-stretch justify-content-strech">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Browser Stats</h4>
+                                <table class="table browser mt-4 no-border">
+                                    <tbody>
+                                        <tr>
+                                            <td style="width:40px"><img src="../admin/assets/images/browser/chrome-logo.png"
+                                                    alt="logo"></td>
+                                            <td>Google Chrome</td>
+                                            <td align="right"><span class="badge badge-info">23%</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><img src="../admin/assets/images/browser/firefox-logo.png" alt="logo"></td>
+                                            <td>Mozila Firefox</td>
+                                            <td align="right"><span class="badge badge-success">15%</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><img src="../admin/assets/images/browser/safari-logo.png" alt="logo"></td>
+                                            <td>Apple Safari</td>
+                                            <td align="right"><span class="badge badge-primary">07%</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><img src="../admin/assets/images/browser/internet-logo.png" alt="logo">
+                                            </td>
+                                            <td>Internet Explorer</td>
+                                            <td align="right"><span class="badge badge-warning">09%</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><img src="../admin/assets/images/browser/opera-logo.png" alt="logo"></td>
+                                            <td>Opera mini</td>
+                                            <td align="right"><span class="badge badge-danger">23%</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><img src="../admin/assets/images/browser/internet-logo.png" alt="logo">
+                                            </td>
+                                            <td>Microsoft edge</td>
+                                            <td align="right"><span class="badge badge-primary">09%</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 d-flex align-items-stretch justify-content-strech">
+                        <div class="card w-100">
+                            <div class="card-body">
+                                <h4 class="card-title">Visits around the countries</h4>
+                                <ul class="list-style-none country-state mt-3">
+                                    <li class="mb-4">
+                                        <h2 class="mb-0">6350</h2>
+                                        <small>From India</small>
+                                        <div class="float-right">48% <i class="fas fa-level-up-alt text-success"></i>
+                                        </div>
+                                        <div class="progress">
+                                            <div class="progress-bar bg-success" role="progressbar"
+                                                style="width: 48%; height: 6px;" aria-valuenow="25" aria-valuemin="0"
+                                                aria-valuemax="100"></div>
+                                        </div>
+                                    </li>
+                                    <li class="mb-4">
+                                        <h2 class="mb-0">3250</h2>
+                                        <small>From UAE</small>
+                                        <div class="float-right">98% <i class="fas fa-level-up-alt text-success"></i>
+                                        </div>
+                                        <div class="progress">
+                                            <div class="progress-bar bg-info" role="progressbar"
+                                                style="width: 48%; height: 6px;" aria-valuenow="25" aria-valuemin="0"
+                                                aria-valuemax="100"></div>
+                                        </div>
+                                    </li>
+                                    <li class="mb-4">
+                                        <h2 class="mb-0">1250</h2>
+                                        <small>From Australia</small>
+                                        <div class="float-right">75% <i class="fas fa-level-down-alt text-danger"></i>
+                                        </div>
+                                        <div class="progress">
+                                            <div class="progress-bar bg-inverse" role="progressbar"
+                                                style="width: 48%; height: 6px;" aria-valuenow="25" aria-valuemin="0"
+                                                aria-valuemax="100"></div>
+                                        </div>
+                                    </li>
+                                    <li class="mb-4">
+                                        <h2 class="mb-0">1350</h2>
+                                        <small>From USA</small>
+                                        <div class="float-right">48% <i class="fas fa-level-up-alt text-success"></i>
+                                        </div>
+                                        <div class="progress">
+                                            <div class="progress-bar bg-warning" role="progressbar"
+                                                style="width: 48%; height: 6px;" aria-valuenow="25" aria-valuemin="0"
+                                                aria-valuemax="100"></div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 d-flex align-items-stretch justify-content-strech">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Feeds</h4>
+                                <div class="feed-widget scrollable" style="height: 400px;">
+                                    <div class="row my-3 align-items-center">
+                                        <div class="col-md-2">
+                                            <a href="javascript:void(0)"
+                                                class="btn btn-info btn-circle font-18 text-white d-flex align-items-center justify-content-center"><i
+                                                    class="far fa-bell"></i></a>
+                                        </div>
+                                        <div class="col-md-7 text-truncate">
+                                            <span class=""> {{usermessages}} user messages.</span>
+                                        </div>
+                                        <div class="col-md-3 text-truncate">
+                                            <span class="font-12 text-muted">Just Now</span>
+                                        </div>
+                                    </div>
+                                    <div class="row my-3 align-items-center">
+                                        <div class="col-md-2">
+                                            <a href="javascript:void(0)"
+                                                class="btn btn-success btn-circle font-18 text-white d-flex align-items-center justify-content-center"><i
+                                                    class="ti-server"></i></a>
+                                        </div>
+                                        <div class="col-md-7 text-truncate">
+                                            <span class="text-truncate">{{products.length}} Products</span>
+                                        </div>
+                                        <div class="col-md-3 text-truncate">
+                                            <span class="font-12 text-muted">2 Hours ago</span>
+                                        </div>
+                                    </div>
+                                    <div class="row my-3 align-items-center">
+                                        <div class="col-md-2">
+                                            <a href="javascript:void(0)"
+                                                class="btn btn-warning btn-circle font-18 text-white d-flex align-items-center justify-content-center"><i
+                                                    class="ti-shopping-cart"></i></a>
+                                        </div>
+                                        <div class="col-md-7 text-truncate">
+                                            <span class="text-truncate">{{orders.length}} orders</span>
+                                        </div>
+                                        <div class="col-md-3 text-truncate">
+                                            <span class="font-12 text-muted">31 May</span>
+                                        </div>
+                                    </div>
+                                    <div class="row my-3 align-items-center">
+                                        <div class="col-md-2">
+                                            <a href="javascript:void(0)"
+                                                class="btn btn-danger btn-circle font-18 text-white d-flex align-items-center justify-content-center"><i
+                                                    class="ti-user"></i></a>
+                                        </div>
+                                        <div class="col-md-7 text-truncate">
+                                            <span class="text-truncate">New user registered.</span>
+                                        </div>
+                                        <div class="col-md-3 text-truncate">
+                                            <span class="font-12 text-muted">30 May</span>
+                                        </div>
+                                    </div>
+                                    <div class="row my-3 align-items-center">
+                                        <div class="col-md-2">
+                                            <a href="javascript:void(0)"
+                                                class="btn btn-inverse btn-circle font-18 text-white d-flex align-items-center justify-content-center"><i
+                                                    class="ti-user"></i></a>
+                                        </div>
+                                        <div class="col-md-7 text-truncate">
+                                            <span class="text-truncate">New Version just arrived.</span>
+                                        </div>
+                                        <div class="col-md-3 text-truncate">
+                                            <span class="font-12 text-muted">27 May</span>
+                                        </div>
+                                    </div>
+                                    <div class="row my-3 align-items-center">
+                                        <div class="col-md-2">
+                                            <a href="javascript:void(0)"
+                                                class="btn btn-info btn-circle font-18 text-white d-flex align-items-center justify-content-center"><i
+                                                    class="far fa-bell"></i></a>
+                                        </div>
+                                        <div class="col-md-7 text-truncate">
+                                            <span class="text-truncate">You have 4 pending tasks.</span>
+                                        </div>
+                                        <div class="col-md-3 text-truncate">
+                                            <span class="font-12 text-muted">30 May</span>
+                                        </div>
+                                    </div>
+                                    <div class="row my-3 align-items-center">
+                                        <div class="col-md-2">
+                                            <a href="javascript:void(0)"
+                                                class="btn btn-warning btn-circle font-18 text-white d-flex align-items-center justify-content-center"><i
+                                                    class="ti-shopping-cart"></i></a>
+                                        </div>
+                                        <div class="col-md-7 text-truncate">
+                                            <span class="text-truncate">New order received.</span>
+                                        </div>
+                                        <div class="col-md-3 text-truncate">
+                                            <span class="font-12 text-muted">31 May</span>
+                                        </div>
+                                    </div>
+                                    <div class="row my-3 align-items-center">
+                                        <div class="col-md-2">
+                                            <a href="javascript:void(0)"
+                                                class="btn btn-danger btn-circle font-18 text-white d-flex align-items-center justify-content-center"><i
+                                                    class="ti-user"></i></a>
+                                        </div>
+                                        <div class="col-md-7 text-truncate">
+                                            <span class="text-truncate">New user registered.</span>
+                                        </div>
+                                        <div class="col-md-3 text-truncate">
+                                            <span class="font-12 text-muted">30 May</span>
+                                        </div>
+                                    </div>
+                                    <div class="row my-3 align-items-center">
+                                        <div class="col-md-2">
+                                            <a href="javascript:void(0)"
+                                                class="btn btn-inverse btn-circle font-18 text-white d-flex align-items-center justify-content-center"><i
+                                                    class="ti-user"></i></a>
+                                        </div>
+                                        <div class="col-md-7 text-truncate">
+                                            <span class="text-truncate">New Version just arrived.</span>
+                                        </div>
+                                        <div class="col-md-3 text-truncate">
+                                            <span class="font-12 text-muted">27 May</span>
+                                        </div>
+                                    </div>
+                                    <div class="row my-3 align-items-center">
+                                        <div class="col-md-2">
+                                            <a href="javascript:void(0)"
+                                                class="btn btn-success btn-circle font-18 text-white d-flex align-items-center justify-content-center"><i
+                                                    class="ti-server"></i></a>
+                                        </div>
+                                        <div class="col-md-7 text-truncate">
+                                            <span class="text-truncate">Server #1 overloaded</span>
+                                        </div>
+                                        <div class="col-md-3 text-truncate">
+                                            <span class="font-12 text-muted">2 Hours ago</span>
+                                        </div>
+                                    </div>
+                                    <div class="row my-3 align-items-center">
+                                        <div class="col-md-2">
+                                            <a href="javascript:void(0)"
+                                                class="btn btn-warning btn-circle font-18 text-white d-flex align-items-center justify-content-center"><i
+                                                    class="ti-shopping-cart"></i></a>
+                                        </div>
+                                        <div class="col-md-7 text-truncate">
+                                            <span class="text-truncate">New order received.</span>
+                                        </div>
+                                        <div class="col-md-3 text-truncate">
+                                            <span class="font-12 text-muted">31 May</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                	<div class="container-fluid">
+
+
+				<!-- ============================================================== -->
+				<!-- Start Page Content -->
+				<!-- ============================================================== -->
+				<div class="row">
+					<div class="col-12">
+						<div class="card">
+							<div class="card-body">
+								{{!-- <h4 class="card-title">User Messages</h4> --}}
+								{{!-- <h6 class="card-subtitle">you can use any icon with
+									class of <code class="mr-2">mid mid-</code>name
+									of icon</h6> --}}
+                                   
+								<div class="table-responsive">
+									<table class="table table-striped">
+										<thead class="bg-dark text-light">
+											<tr>
+												<th scope="col-1">S.No.</th>
+												<th scope="col-2">Customer Name</th>
+												<th scope="col-2">Customer Email </th>
+												<th scope="col-2">Customer Mobile</th>
+												<th scope="col-4">Customer Pincode</th>
+                                                <th scope="col-4">Customer Address</th>
+                                                <th scope="col-1">Order Date</th>
+												<th scope="col-1"></th>
+											</tr>
+										</thead>
+
+										<tbody>
+                                            <script>let countorder = 1;</script>
+                                        {{#each orders}}
+                                        
+                                        <tr>
+                                            
+                                            <td id="order{{@index}}" class="align-middle num">
+                                                <script>document.getElementById("order{{@index}}").innerHTML=(countorder + {{ @index }})</script>
+                                            </td>
+												<td class="align-middle">{{this.customerName}}</td>
+												<td class="align-middle">{{this.customerEmail}}</td>
+												<td class="align-middle">{{this.customerMobile}}</td>
+												<td class="align-middle">{{this.customerPincode}}</td>
+                                                <td class="align-middle">{{this.customerAddress}}</td>
+                                                <td class="align-middle">{{this.orderDate}}</td>
+												<td class="align-middle">
+													<form action="/orderdelete" method="POST">
+														<input type="hidden" name="id" value="{{this._id}}">
+														<input type="submit" class="btn btn-danger" value="delete">
+													</form>
+												</td>
+											</tr>
+											<script>document.getElementById("id{{@index}}").innerHTML = {{ @index }}+1</script>
+											{{/each}}
+										</tbody>
+									</table>
+								</div>
+                                    
+							</div>
+						</div>
+					</div>
+
+				</div>
+				<!-- ============================================================== -->
+				<!-- End PAge Content -->
+				<!-- ============================================================== -->
+			</div>
+                <!-- *************************************************************** -->
+                <!-- End Total Sales & Earnings Chart -->
+                <!-- *************************************************************** -->
+                <!-- *************************************************************** -->
+                <!-- Start Top Leader Table -->
+                <!-- *************************************************************** -->
+                {{!-- <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title mb-4">Top Leaders</h4>
+                                <div class="table-responsive">
+                                    <table class="table no-wrap v-middle mb-0">
+                                        <thead>
+                                            <tr class="border-0">
+                                                <th class="border-0 font-weight-medium text-muted">Team Lead</th>
+                                                <th class="border-0 font-weight-medium text-muted px-2">Project</th>
+                                                <th class="border-0 font-weight-medium text-muted">Team</th>
+                                                <th class="border-0 font-weight-medium text-muted text-center">Status
+                                                </th>
+                                                <th class="border-0 font-weight-medium text-muted text-center">Weeks
+                                                </th>
+                                                <th class="border-0 font-weight-medium text-muted">Budget</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="border-top-0 p-2">
+                                                    <div class="d-flex no-block align-items-center">
+                                                        <div class="mr-3"><img
+                                                                src="../admin/assets/images/users/widget-table-pic1.jpg"
+                                                                alt="user" class="rounded-circle" width="45"
+                                                                height="45" /></div>
+                                                        <div class="">
+                                                            <h5 class="mb-0 font-16 font-weight-medium">Hanna Gover</h5>
+                                                            <span class="text-muted">hgover@gmail.com</span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="border-top-0 text-muted p-2">Elite Admin</td>
+                                                <td class="border-top-0">
+                                                    <div class="popover-icon">
+                                                        <a class="btn btn-light-info rounded-circle btn-circle text-dark"
+                                                            href="javascript:void(0)">DS</a>
+                                                        <a class="btn btn-light-danger rounded-circle btn-circle text-dark popover-item"
+                                                            href="javascript:void(0)">SS</a>
+                                                        <a class="btn btn-light-warning rounded-circle btn-circle text-dark popover-item"
+                                                            href="javascript:void(0)">RP</a>
+                                                        <a class="btn btn-light-success rounded-circle btn-circle text-success font-20"
+                                                            href="javascript:void(0)">+</a>
+                                                    </div>
+                                                </td>
+                                                <td class="border-top-0 text-center"><i class="fa fa-circle text-info"
+                                                        data-toggle="tooltip" data-placement="top"
+                                                        title="In Testing"></i></td>
+                                                <td class="border-top-0 text-center font-weight-medium text-muted">35
+                                                </td>
+                                                <td class="font-weight-medium text-dark border-top-0">$96K</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="p-2">
+                                                    <div class="d-flex no-block align-items-center">
+                                                        <div class="mr-3"><img
+                                                                src="../admin/assets/images/users/widget-table-pic2.jpg"
+                                                                alt="user" class="rounded-circle" width="45"
+                                                                height="45" /></div>
+                                                        <div class="">
+                                                            <h5 class="mb-0 font-16 font-weight-medium">Daniel Kristeen
+                                                            </h5>
+                                                            <span class="text-muted">Kristeen@gmail.com</span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="text-muted p-2">Real Homes WP Theme</td>
+                                                <td>
+                                                    <div class="popover-icon">
+                                                        <a class="btn btn-light-info rounded-circle btn-circle text-dark"
+                                                            href="javascript:void(0)">DS</a>
+                                                        <a class="btn btn-light-danger rounded-circle btn-circle text-dark popover-item"
+                                                            href="javascript:void(0)">SS</a>
+                                                        <a class="btn btn-light-success rounded-circle btn-circle text-success font-20"
+                                                            href="javascript:void(0)">+</a>
+                                                    </div>
+                                                </td>
+                                                <td class="text-center"><i class="fa fa-circle text-success"
+                                                        data-toggle="tooltip" data-placement="top" title="Done"></i>
+                                                </td>
+                                                <td class="text-center text-muted font-weight-medium">32</td>
+                                                <td class="font-weight-medium text-dark">$85K</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="p-2">
+                                                    <div class="d-flex no-block align-items-center">
+                                                        <div class="mr-3"><img
+                                                                src="../admin/assets/images/users/widget-table-pic3.jpg"
+                                                                alt="user" class="rounded-circle" width="45"
+                                                                height="45" /></div>
+                                                        <div class="">
+                                                            <h5 class="mb-0 font-16 font-weight-medium">Julian Josephs
+                                                            </h5>
+                                                            <span class="text-muted">Josephs@gmail.com</span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="text-muted p-2">MedicalPro WP Theme</td>
+                                                <td>
+                                                    <div class="popover-icon">
+                                                        <a class="btn btn-light-info rounded-circle btn-circle text-dark"
+                                                            href="javascript:void(0)">DS</a>
+                                                        <a class="btn btn-light-danger rounded-circle btn-circle text-dark popover-item"
+                                                            href="javascript:void(0)">SS</a>
+                                                        <a class="btn btn-light-warning rounded-circle btn-circle text-dark popover-item"
+                                                            href="javascript:void(0)">RP</a>
+                                                        <a class="btn btn-light-success rounded-circle btn-circle text-success font-20"
+                                                            href="javascript:void(0)">+</a>
+                                                    </div>
+                                                </td>
+                                                <td class="text-center"><i class="fa fa-circle text-danger"
+                                                        data-toggle="tooltip" data-placement="top" title="Done"></i>
+                                                </td>
+                                                <td class="text-center text-muted font-weight-medium">29</td>
+                                                <td class="font-weight-medium text-dark">$81K</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="p-2">
+                                                    <div class="d-flex no-block align-items-center">
+                                                        <div class="mr-3"><img
+                                                                src="../admin/assets/images/users/widget-table-pic4.jpg"
+                                                                alt="user" class="rounded-circle" width="45"
+                                                                height="45" /></div>
+                                                        <div class="">
+                                                            <h5 class="mb-0 font-16 font-weight-medium">Jan Petrovic
+                                                            </h5>
+                                                            <span class="text-muted">hgover@gmail.com</span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="text-muted p-2">Hosting Press HTML</td>
+                                                <td>
+                                                    <div class="popover-icon">
+                                                        <a class="btn btn-light-info rounded-circle btn-circle text-dark"
+                                                            href="javascript:void(0)">DS</a>
+                                                        <a class="btn btn-light-cyan rounded-circle btn-circle text-success font-20"
+                                                            href="javascript:void(0)">+</a>
+                                                    </div>
+                                                </td>
+                                                <td class="text-center"><i class="fa fa-circle text-warning"
+                                                        data-toggle="tooltip" data-placement="top"
+                                                        title="In Progress"></i></td>
+                                                <td class="text-center text-muted font-weight-medium">23</td>
+                                                <td class="font-weight-medium text-dark">$80K</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> --}}
+                <!-- *************************************************************** -->
+                <!-- End Top Leader Table -->
+                <!-- *************************************************************** -->
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- footer -->
+            <!-- ============================================================== -->
+{{>footer}}
+            <!-- ============================================================== -->
+            <!-- End footer -->
+            <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page wrapper  -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+ 
+    {{>adminallqueries}}
+ <script>
+        $(document).ready(function () {
+            let msg = "{{message}}"
+            if (msg){
+                swal("Congratulations", msg , "success");
+                setTimeout(() => {
+                    window.location.assign("/admin/dashboard")
+            }, 2000)
+            }
+        });
+    </script>
+</body>
+
+</html>

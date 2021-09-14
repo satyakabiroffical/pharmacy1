@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<head>
+
+    {{>admin_id_head}}
+  
+    <title>Admin Product Update</title>
+
+</head>
+
+<body>
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin1" data-sidebartype="full"
+        data-sidebar-position="absolute" data-header-position="relative" data-boxed-layout="full">
+        <div class="app-container" data-navbarbg="skin1"></div>
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+        {{>adminheader}}
+        <!-- ============================================================== -->
+        <!-- End Topbar header -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        {{>adminsidebar}}
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper p-4">
+
+            <div class="page-breadcrumb">
+                <div class="row">
+                    <div class="col-7 align-self-center">
+                        <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Update Products</h4>
+                        <div class="d-flex align-items-center">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb m-0 p-0">
+                                    <li class="breadcrumb-item"><a href="/admin/dashboard" class="text-muted">Home</a></li>
+                                    <li class="breadcrumb-item text-muted active" aria-current="page">Update Products</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="col-5 align-self-end">
+                      
+                        <div class="customize-input float-right">
+                              {{!-- <a href="/admin/addproduct" class="btn btn-primary rounded-pill"> <i class="mdi mdi-cart-plus" style="font-size:1rem;"></i> Add Product</a> --}}
+                            {{!-- <select class="custom-select form-control">
+                                <option selected>June 19</option>
+                                <option value="1">July 19</option>
+                                <option value="2">Aug 19</option>
+                            </select> --}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+               
+            <div class="row">
+                <div class="col-md-3 "></div>
+                
+               <div class="col-md-6">
+                    <h2 class="mb-4 text-center">Update Product Form</h2>
+                      <form action="/admin/updateproduct" method="POST" >
+                        <div class="">
+                          <fieldset>
+                            <input type="hidden" name = "id" value="{{product._id}}">
+                          
+                              <span  class="pb-4 mb-4" >Product's Name</span  >
+                              <span  class="pb-4 mb-4 mx-4" >character "/" not allowed</span  >
+                              
+                            <input name="productName" type="text" class="form-control mb-4" id="name" value="{{product.productName}}" required="">
+                          </fieldset>
+                        </div>
+                      <div class="">
+                          <fieldset>
+                              <span  class="pb-4 mb-4">Product description</span> 
+                            <textarea name="productDescription" rows="6" class="form-control mb-4" id="message"  required="">{{product.productDescription}}</textarea>
+                          </fieldset>
+                        </div>
+                        <div class="">
+                          <fieldset>
+                              <span  class="pb-4 mb-4">Product's Price</span  >
+                            <input name="productPrice" type="number" class="form-control mb-4" id="name" value="{{product.productPrice}}" required="">
+                          </fieldset>
+                        </div>
+                         <div class="">
+                          <fieldset>
+                              <span  class="pb-4 mb-4">Product's Quantity</span  >
+                            <input name="productQuantity" type="number" class="form-control mb-4" id="name" value="{{product.productQuantity}}" required="">
+                          </fieldset>
+                        </div>
+                      
+                        <div class="text-right" >
+                          <fieldset>
+                            <button type="submit" id="form-submit" class="btn btn-primary">Update this Product</button>
+                          </fieldset>
+                        </div>
+
+                        <div class="text-right " style="height:50px ;" >
+                          <fieldset>
+                            
+                          </fieldset>
+                        </div>
+                      </form>
+                    </div>
+            </div>
+
+
+           {{>footer}}
+            <!-- ============================================================== -->
+            <!-- End footer -->
+            <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page wrapper  -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+
+    
+   {{>admin_id_allqueries}}
+</body>
+
+</html>
